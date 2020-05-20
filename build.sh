@@ -16,7 +16,6 @@ sudo docker build --build-arg LINUXSAMPLER_VERSION="$LINUXSAMPLER_VERSION" --bui
 
 sudo docker run -it -d --name $DOCKER_IMAGE $DOCKER_IMAGE /bin/bash
 sudo docker exec -it $DOCKER_IMAGE make -j8
-sudo docker exec -it $DOCKER_IMAGE make install
-sudo docker exec -it $DOCKER_IMAGE tar -czvf linuxsampler-$LINUXSAMPLER_VERSION.tar.gz linuxsampler-$LINUXSAMPLER_VERSION
-sudo docker cp $DOCKER_IMAGE:/root/linuxsampler-$LINUXSAMPLER_VERSION/linuxsampler-$LINUXSAMPLER_VERSION.tar.gz ./
-sudo chown $USER linuxsampler-$LINUXSAMPLER_VERSION.tar.gz
+sudo docker exec -it $DOCKER_IMAGE checkinstall -D -y --nodoc --backup=no --pkglicense="GPL2" --maintainer="S. Yakupov \\<s.yakupov@noviga.com\\>" --requires="libasound2,libgig9,libjack0,libsndfile1,libsqlite3-0" --install=no
+sudo docker cp $DOCKER_IMAGE:/root/linuxsampler-$LINUXSAMPLER_VERSION/linuxsampler_$LINUXSAMPLER_VERSION-1_amd64.deb ./
+sudo chown $USER linuxsampler_$LINUXSAMPLER_VERSION-1_amd64.deb

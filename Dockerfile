@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     autoconf \
     bison \
     build-essential \
+    checkinstall \
     dssi-dev \
     file \
     libasio-dev \
@@ -26,26 +27,4 @@ RUN wget -nv https://download.linuxsampler.org/packages/linuxsampler-$LSVER.tar.
 RUN tar -xvf linuxsampler-$LSVER.tar.bz2
 WORKDIR /root/linuxsampler-$LSVER
 RUN mkdir linuxsampler-$LSVER
-RUN ./configure --prefix "$(pwd)/linuxsampler-$LSVER"
-
-#RUN make -j8
-#RUN make install
-#WORKDIR /root
-#RUN tar -czvf linuxsampler-$LSVER.tar.gz linuxsampler-$LSVER
-
-# ----------
-
-#FROM $UBUNTU
-#RUN apt-get update && apt-get install -y \
-#    libasound2 \
-#    libgig9 \
-#    libjack0 \
-#    libsndfile1 \
-#    libsqlite3-0
-
-#WORKDIR /root
-#COPY --from=0 /root/linuxsampler-$LSVER.tar.gz .
-#RUN tar -xvf linuxsampler-$LSVER.tar.gz
-#WORKDIR /root/linuxsampler-$LSVER
-#RUN cp -Rvf * /usr
-#RUN linuxsampler --version
+RUN ./configure
